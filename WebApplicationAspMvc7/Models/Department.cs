@@ -7,7 +7,8 @@ namespace WebApplicationAspMvc7.Models
 {
     public class Department
     {
-        public int id { get; set; }
+        public int Dept_Id { get; set; }
         public string Dept_name { get; set; }
+        public List<Department> deptInfo { get; set; }
     }
 }

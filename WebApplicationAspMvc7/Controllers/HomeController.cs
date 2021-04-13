@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplicationAspMvc7.Models;
+using WebApplicationAspMvc7.DataAccess;
+using System.Data;
 
 namespace WebApplicationAspMvc7.Controllers
 {
@@ -11,42 +13,57 @@ namespace WebApplicationAspMvc7.Controllers
     {
 
         Department ds = new Department();
+        DataAccessLayer da = new DataAccessLayer();
 
         // GET: Home
         public ActionResult Index()
         {
+            ds = da.getDeptComboList();
+            return View(ds);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection fc)
+        {
+            Employee e = new Employee();
+            e.Name = fc["Name"];
+            e.Department_id = Convert.ToInt32(fc["Dept_Id"]);
+            e.Email  = fc["Email"];
+            e.Gender = fc["Gender"];
+            da.SaveEmployee(e);
+            return RedirectToAction("Display_Employee");
+        }
+
+
+        public ActionResult Display_Employee()
+        {
+            DataSet ds = da.Show_AllEmp();
+            ViewBag.epmlist = ds.Tables[0];
             return View();
         }
 
-        public ActionResult Index1()
+
+        public ActionResult Update_Eployee(string id)
         {
-            /*
-                UserDetails objuser = new UserDetails();
-                DataSet ds = new DataSet();
-                using (SqlConnection con = new SqlConnection("Data Source=Suresh;Integrated Security=true;Initial Catalog=MySamplesDB"))
-                {
-                    using (SqlCommand cmd = new SqlCommand("select * from userdetails", con))
-                    {
-                        con.Open();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(ds);
-                        List<UserDetails> userlist = new List<UserDetails>();
-                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                        {
-                            UserDetails uobj = new UserDetails();
-                            uobj.UserId = Convert.ToInt32(ds.Tables[0].Rows[i]["userid"].ToString());
-                            uobj.UserName = ds.Tables[0].Rows[i]["username"].ToString();
-                            uobj.Education = ds.Tables[0].Rows[i]["education"].ToString();
-                            uobj.Location = ds.Tables[0].Rows[i]["location"].ToString();
-                            userlist.Add(uobj);
-                        }
-                        objuser.usersinfo = userlist;
-                    }
-                    con.Close();
-                }
-                return View(objuser);
-            */
-            return View();
+            DataSet ds = da.Show_Employee(Convert.ToInt32(id));
+            Department d = da.getDeptComboList();
+            ViewBag.employee = ds.Tables[0];
+            return View(d);
         }
+
+
+        /*
+         public EditUser(int userId) {
+            var user = LoadUserFromDB(userId);
+            var model = new UserModel();
+            model.CountryId = user.CountryId;
+            model.Countries = GetAllCountries();
+            //... other code to set the rest of the properties
+            return View(model);
+        }
+         
+         */
+
+
     }
 }

@@ -14,7 +14,7 @@ F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\bin\System.Web.WebPages.xml
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\bin\System.Web.WebPages.Deployment.xml
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\bin\System.Web.WebPages.Razor.xml
-F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\obj\Debug\WebApplicationAspMvc7.csprojResolveAssemblyReference.cache
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\obj\Debug\WebApplicationAspMvc7.csproj.CoreCompileInputs.cache
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\obj\Debug\WebApplicationAspMvc7.dll
 F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\obj\Debug\WebApplicationAspMvc7.pdb
+F:\FKL_Project_Workspaces\Project_WorkSpace_DotNet\ASP CRUD\WebApplicationAspMvc7\WebApplicationAspMvc7\obj\Debug\WebApplicationAspMvc7.csprojResolveAssemblyReference.cache
