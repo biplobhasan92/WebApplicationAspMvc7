@@ -1,5 +1,5 @@
 ﻿
-@model global::WebApplicationAspMvc7.Models.Department
+@model global::WebApplicationAspMvc7.Models.Employee
 
 @{
     Layout = null;
@@ -40,6 +40,56 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-4"></div>
                 </div>
+
+
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input value="@Model.Name" class="form-control" />
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Select Department</label>
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownList("Dept_Id", new SelectList(Model.deptInfo, "Dept_Id", "Dept_name", Model.Department_id), new { @class = "form-control" })                        
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Gender</label>
+                    </div>
+                  
+                    <div class="col-md-5">
+                        Male:  @Html.RadioButtonFor(model => model.Gender, "Male", Model.Gender == "Male" ? new { @Checked = "checked" } : null)
+                        Female:  @Html.RadioButtonFor(model => model.Gender, "Female", Model.Gender == "Female" ? new { @Checked = "checked" } : null)
+                        
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="email" name="Email" value="@Model.Email" class="form-control" />
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                @*
                 @{
                     foreach (System.Data.DataRow dr in ViewBag.employee.Rows)
                     {
@@ -62,8 +112,14 @@
                             </div>
                             <div class="col-md-5">
                                 
-                                @Html.DropDownList("Dept_Id", new SelectList(Model.deptInfo, "Dept_Id", "Dept_name"), "-- Select --" , new { @value = dr["Dept_id"].ToString(), @Text = dr["Dept_name"].ToString(),  @class = "form-control" })
+                                 <select asp-items="@(new SelectList(Model.deptInfo, "Dept_Id", "Dept_name"))">
+                                     <option value="">None</option>
+                                 </select>
+                                @Html.DropDownList("Dept_Id", new SelectList(Model.deptInfo, "Dept_Id", "Dept_name", @dr["Dept_Id"].ToString()), new { @class = "form-control" })
                                 
+
+                                @Html.DropDownList("Dept_Id", new SelectList(Model.deptInfo, "Dept_Id", "Dept_name", @dr["Dept_Id"].ToString()), new { @class = "form-control" })
+
                             </div>
                             <div class="col-md-2"></div>
                         </div>
@@ -92,6 +148,8 @@
                         </div>
                     }
                 }
+
+                *@
 
                 <div class="row" style="margin-bottom:30px;">
                     <div class="col-md-2"></div>

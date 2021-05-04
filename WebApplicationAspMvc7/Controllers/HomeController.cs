@@ -14,13 +14,17 @@ namespace WebApplicationAspMvc7.Controllers
 
         Department ds = new Department();
         DataAccessLayer da = new DataAccessLayer();
-
+        Employee e = new Employee();
         // GET: Home
         public ActionResult Index()
         {
             ds = da.getDeptComboList();
             return View(ds);
         }
+
+
+
+
 
         [HttpPost]
         public ActionResult Index(FormCollection fc)
@@ -45,10 +49,14 @@ namespace WebApplicationAspMvc7.Controllers
 
         public ActionResult Update_Eployee(string id)
         {
-            DataSet ds = da.Show_Employee(Convert.ToInt32(id));
+           
+            DataTable dt = new DataTable();
+            var ds = da.Show_Employee(Convert.ToInt32(id));
+            e = da.Show_OneEmployee(Convert.ToInt32(id));
             Department d = da.getDeptComboList();
-            ViewBag.employee = ds.Tables[0];
-            return View(d);
+            // dt = ds.Tables[0];
+            // ViewBag.employee = ds.Tables[0];
+            return View(e);
         }
 
 

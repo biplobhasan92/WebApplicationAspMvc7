@@ -12,7 +12,7 @@ namespace WebApplicationAspMvc7.DataAccess
     public class DataAccessLayer
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
-
+        
 
         public Department getDeptComboList()
         {
@@ -36,6 +36,32 @@ namespace WebApplicationAspMvc7.DataAccess
             return deptAl;
         }
         
+        
+
+
+        public List<Department> getListOfDepartment()
+        {
+            List<Department> deptList = new List<Department>();
+            DataSet ds = new DataSet();
+            SqlCommand cmd = new SqlCommand("Sp_GetAll_Department", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(ds);
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                Department dept = new Department();
+                dept.Dept_Id = Convert.ToInt32(ds.Tables[0].Rows[i]["Dept_Id"].ToString());
+                dept.Dept_name = ds.Tables[0].Rows[i]["Dept_name"].ToString();
+                deptList.Add(dept);
+            }
+            conn.Close();
+            return deptList;
+        }
+
+
+
+
          
         public DataSet Show_AllEmp()
         {
@@ -58,6 +84,30 @@ namespace WebApplicationAspMvc7.DataAccess
             DataSet ds = new DataSet();
             da.Fill(ds);
             return ds;
+        }
+
+
+        public Employee Show_OneEmployee(int empid)
+        {
+            Employee e = new Employee();
+            SqlCommand cmd = new SqlCommand("Sp_Emp_getDataByID", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Emp_id", empid);
+            SqlDataAdapter daa = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            daa.Fill(ds);
+            dt = ds.Tables[0];
+            foreach (DataRow dr in dt.Rows)
+            {
+                e.Emp_id = int.Parse(dr["Emp_id"].ToString());
+                e.Name = dr["Name"].ToString();
+                e.Department_id = int.Parse(dr["Dept_id"].ToString());
+                e.Email = dr["Email"].ToString();
+                e.Gender = dr["Gender"].ToString();
+                e.deptInfo = getListOfDepartment();
+            }
+            return e;
         }
 
 
