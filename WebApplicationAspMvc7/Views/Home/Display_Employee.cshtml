@@ -64,7 +64,8 @@
                                         <a href="/Home/Update_Eployee?id=@dr["Emp_id"]">Edit</a>
                                     </td>
                                     <td>
-                                        <a>Delete</a>
+                                        
+                                        <a href="@Url.Action("Delete_Eployee", "Home", new { id = @dr["Emp_id"] })" onclick="return confirm('Do you want to Delete the Record ?')">Delete</a>
                                     </td>
                                 </tr>
                             }

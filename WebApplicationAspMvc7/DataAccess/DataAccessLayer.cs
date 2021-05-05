@@ -137,5 +137,58 @@ namespace WebApplicationAspMvc7.DataAccess
             return b;
         }
 
+
+        public Boolean UpdateEmployee(Employee e)
+        {
+            bool b = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("Sp_Emp_Update", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Emp_id", e.Emp_id);
+                cmd.Parameters.AddWithValue("@Name", e.Name);
+                cmd.Parameters.AddWithValue("@Department_id", e.Department_id);
+                cmd.Parameters.AddWithValue("@Gender", e.Gender);
+                cmd.Parameters.AddWithValue("@Email", e.Email);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                    b = true;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return b;
+        }
+
+
+        public Boolean DeleteEmployee(int empID)
+        {
+            bool b = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("Sp_Emp_Delete", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Emp_id", empID);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                    b = true;
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return b;
+        }
+
+
     }
 }

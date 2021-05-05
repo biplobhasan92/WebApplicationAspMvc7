@@ -60,6 +60,34 @@ namespace WebApplicationAspMvc7.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult Update_Eployee(FormCollection fc)
+        {
+            Employee e = new Employee();
+            e.Emp_id = Convert.ToInt32(fc["Emp_id"].ToString());
+            e.Name = fc["Name"];
+            e.Department_id = Convert.ToInt32(fc["Dept_Id"].ToString());
+            e.Email = fc["Email"];
+            e.Gender = fc["Gender"];
+            if (da.UpdateEmployee(e))
+            {
+                return RedirectToAction("Display_Employee");
+            }
+            else
+            {
+                return RedirectToAction("Update_Eployee");
+            }
+            
+        }
+
+
+        public ActionResult Delete_Eployee(string id)
+        {
+            da.DeleteEmployee(Convert.ToInt32(id));
+            return RedirectToAction("Display_Employee");                       
+        }
+
+
         /*
          public EditUser(int userId) {
             var user = LoadUserFromDB(userId);
